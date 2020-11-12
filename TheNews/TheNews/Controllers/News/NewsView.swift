@@ -33,10 +33,20 @@ class NewsView: UIView {
         return label
     }()
     
+    let descTextView: UITextView = {
+        let textView = UITextView()
+        textView.font = UIFont(name: "avenir", size: 20)
+        textView.isEditable = false
+        textView.isSelectable = false
+
+        return textView
+    }()
+    
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-         configureViewComponents()
+        configureViewComponents()
+        self.backgroundColor = .white
     }
     
     
@@ -44,28 +54,29 @@ class NewsView: UIView {
         
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         dateLabel.translatesAutoresizingMaskIntoConstraints = false
-        descLabel.translatesAutoresizingMaskIntoConstraints = false
+        descTextView.translatesAutoresizingMaskIntoConstraints = false
         
         addSubview(titleLabel)
         addSubview(dateLabel)
-        addSubview(descLabel)
+        addSubview(descTextView)
         
         NSLayoutConstraint.activate([
-            titleLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: 35),
+            titleLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: 15),
             titleLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 20),
             titleLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -20)
         ])
         
         NSLayoutConstraint.activate([
-            dateLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 15),
+            dateLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 10),
             dateLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 20),
             dateLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -20)
         ])
         
         NSLayoutConstraint.activate([
-            descLabel.topAnchor.constraint(equalTo: dateLabel.bottomAnchor, constant: 35),
-            descLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 20),
-            descLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -20)
+            descTextView.topAnchor.constraint(equalTo: dateLabel.bottomAnchor, constant: 20),
+            descTextView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 18),
+            descTextView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -18),
+            descTextView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -20)
         ])
     }
     
