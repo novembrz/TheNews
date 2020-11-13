@@ -10,23 +10,28 @@ import Foundation
 protocol NewsFeedCellViewModelType: class {
     var title: String { get }
     var date: String { get }
+    var isReading: Bool  { get }
 }
 
 
 class NewsFeedCellViewModel: NewsFeedCellViewModelType {
     
-    private var newsItem: NewsItem!
+    private var newsItem: NewsModel! //NewsItem!
     
     var title: String {
         return newsItem.title 
     }
     
     var date: String {
-        return newsItem.pudDate.formattedDate 
+        return newsItem.date.formattedDate//newsItem.pudDate.formattedDate
+    }
+    
+    var isReading: Bool {
+        return newsItem.isReading
     }
     
     
-    init(newsItem: NewsItem){
+    init(newsItem: NewsModel){
         self.newsItem = newsItem
     }
 }

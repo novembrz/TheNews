@@ -40,6 +40,12 @@ struct RealmManager {
         }
     }
     
+    static func deleteAllllll(){
+        try! realm.write {
+            realm.deleteAll()
+        }
+    }
+    
     static func makeItRead(editNews: NewsModel, newState: Bool){
         try! realm.write {
             editNews.isReading = newState

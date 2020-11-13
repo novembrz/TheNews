@@ -9,12 +9,17 @@ import UIKit
 
 class NewsViewController: UIViewController {
     
-    var newsItem: NewsItem?
+    var newsItem: NewsModel?
     private let newsView = NewsView()
     
+    var addToFavButton: UIBarButtonItem!
+    var isFavourite: Bool!
+    var closure: ((NewsModel) -> ())?
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        isFavourite = newsItem?.isFavourite
         
         view.backgroundColor = .white
         updateInfo(news: newsItem!)
@@ -23,10 +28,10 @@ class NewsViewController: UIViewController {
     }
     
     
-    private func updateInfo(news: NewsItem?){
+    private func updateInfo(news: NewsModel?){
         guard let title = news?.title,
-              let date = news?.pudDate,
-              let description = news?.description else { return }
+              let date = news?.date,
+              let description = news?.desc else { return }
         
         newsView.titleLabel.text = title
         newsView.dateLabel.text = date.formattedDate
@@ -66,7 +71,37 @@ class NewsViewController: UIViewController {
         ])
     }
     
+    
+    //MARK: addedFavButton
+    
     private func addedFavButton(){
         
+        let favImage: UIImage!
+        
+        if newsItem?.isFavourite == false {
+            favImage = UIImage(systemName: "heart")
+        } else {
+            favImage = UIImage(systemName: "heart.fill")
+        }
+        
+        addToFavButton = UIBarButtonItem(image: favImage, style: .plain, target: self, action: #selector(addToFavourite))
+        navigationItem.rightBarButtonItem = addToFavButton
+    }
+    
+    
+    @objc func addToFavourite(){
+        
+        isFavourite = !isFavourite
+        RealmManager.makeItFavourite(editNews: newsItem!, newState: isFavourite)
+        
+        let favVC = FavouritesViewController()
+        
+        if newsItem?.isFavourite == false {
+            RealmManager.saveObject(newsItem!)
+            closure?(newsItem!)
+            addToFavButton.image = UIImage(systemName: "heart")
+        } else {
+            addToFavButton.image = UIImage(systemName: "heart.fill")
+        }
     }
 }

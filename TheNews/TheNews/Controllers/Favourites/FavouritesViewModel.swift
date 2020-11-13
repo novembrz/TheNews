@@ -1,33 +1,38 @@
 //
-//  NewsFeedViewModel.swift
+//  FavouritesViewModel.swift
 //  TheNews
 //
-//  Created by Дарья on 11.11.2020.
+//  Created by Дарья on 12.11.2020.
 //
 
 import Foundation
-import RealmSwift
 
-protocol NewsFeedViewModelType {
+protocol FavouritesViewModelType {
     var newsItem: [NewsModel] {get set}
-    var currentSource: SourceModel {get set}
+    var item: NewsModel {get set}
+    var reloadModelClosure: (() ->())? {get set}
     func numberOfRows() -> Int
     func cellViewModel(forIndexPath indexPath: IndexPath) -> NewsFeedCellViewModelType?
 }
 
-class NewsFeedViewModel: NewsFeedViewModelType {
+class FavouritesViewModel: FavouritesViewModelType {
     
     var newsItem: [NewsModel] = []
     
-    var currentSource: SourceModel = SourceModel(title: "Новости Banki.ru", url: CurrentURL.getBankiURlString())
+    var item = NewsModel(){
+        didSet {
+            self.reloadModelClosure?()
+        }
+    }
+    
+    var reloadModelClosure: (() ->())?
     
     func numberOfRows() -> Int {
-        return newsItem.count 
+        return newsItem.count
     }
     
     func cellViewModel(forIndexPath indexPath: IndexPath) -> NewsFeedCellViewModelType? {
         let news = newsItem[indexPath.row]
         return NewsFeedCellViewModel(newsItem: news)
     }
-    
 }

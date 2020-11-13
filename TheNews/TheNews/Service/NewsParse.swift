@@ -35,6 +35,7 @@ class NewsParser: NSObject, XMLParserDelegate {
     func parseFeed(url: String, completionHandler: (([NewsItem]) -> Void)?) -> Void {
         
         self.parserCompletionHandler = completionHandler
+        RealmManager.deleteAllllll()
         
         guard let url = URL(string: url) else {return}
         let request = URLRequest(url: url)

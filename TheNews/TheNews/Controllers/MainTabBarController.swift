@@ -17,11 +17,11 @@ class MainTabBarController: UITabBarController {
         let favouritesViewController = FavouritesViewController()
         let sourceViewController = SourceViewController()
         
-        tabBar.tintColor = #colorLiteral(red: 0.5568627715, green: 0.3529411852, blue: 0.9686274529, alpha: 1)
+        tabBar.tintColor = #colorLiteral(red: 0.1411764771, green: 0.3960784376, blue: 0.5647059083, alpha: 1)
         let boldConfiguration = UIImage.SymbolConfiguration(weight: .medium)
         
         let newsFeedImage = UIImage(systemName: "n.circle.fill", withConfiguration: boldConfiguration)!
-        let favImage = UIImage(systemName: "bookmark", withConfiguration: boldConfiguration)!
+        let favImage = UIImage(systemName: "heart", withConfiguration: boldConfiguration)!
         let sourceImage = UIImage(systemName: "book", withConfiguration: boldConfiguration)!
         
         viewControllers = [

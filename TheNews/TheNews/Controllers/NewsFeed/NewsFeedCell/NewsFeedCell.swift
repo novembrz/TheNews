@@ -35,6 +35,12 @@ class NewsFeedCell: UITableViewCell {
             guard let viewModel = viewModel else { return }
             titleLabel.text = viewModel.title
             dateLabel.text = viewModel.date
+            
+            if viewModel.isReading == true {
+                titleLabel.textColor = #colorLiteral(red: 0.1411764771, green: 0.3960784376, blue: 0.5647059083, alpha: 1)
+            } else {
+                titleLabel.textColor = .black
+            }
         }
     }
     
