@@ -14,18 +14,15 @@ class MainTabBarController: UITabBarController {
         
         
         let newsFeedViewController = NewsFeedViewController()
-        let favouritesViewController = FavouritesViewController()
         let sourceViewController = SourceViewController()
         
         tabBar.tintColor = #colorLiteral(red: 0.1411764771, green: 0.3960784376, blue: 0.5647059083, alpha: 1)
         let boldConfiguration = UIImage.SymbolConfiguration(weight: .medium)
         
         let newsFeedImage = UIImage(systemName: "n.circle.fill", withConfiguration: boldConfiguration)!
-        let favImage = UIImage(systemName: "heart", withConfiguration: boldConfiguration)!
         let sourceImage = UIImage(systemName: "book", withConfiguration: boldConfiguration)!
         
         viewControllers = [
-            generateNavigationController(rootViewController: favouritesViewController, title: "Favourites", image: favImage),
             generateNavigationController(rootViewController: newsFeedViewController, title: "NewsFeed", image: newsFeedImage),
             generateNavigationController(rootViewController: sourceViewController, title: "Source", image: sourceImage)
         ]

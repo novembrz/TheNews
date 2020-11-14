@@ -34,13 +34,7 @@ struct RealmManager {
         }
     }
     
-    static func deleteAll(_ news: Results<NewsModel>) {
-        try! realm.write {
-            realm.delete(news)
-        }
-    }
-    
-    static func deleteAllllll(){
+    static func deleteAll(){
         try! realm.write {
             realm.deleteAll()
         }

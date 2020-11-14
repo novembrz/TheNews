@@ -12,19 +12,14 @@ class NewsViewController: UIViewController {
     var newsItem: NewsModel?
     private let newsView = NewsView()
     
-    var addToFavButton: UIBarButtonItem!
-    var isFavourite: Bool!
     var closure: ((NewsModel) -> ())?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        isFavourite = newsItem?.isFavourite
-        
         view.backgroundColor = .white
         updateInfo(news: newsItem!)
         createUI()
-        addedFavButton()
     }
     
     
@@ -71,37 +66,4 @@ class NewsViewController: UIViewController {
         ])
     }
     
-    
-    //MARK: addedFavButton
-    
-    private func addedFavButton(){
-        
-        let favImage: UIImage!
-        
-        if newsItem?.isFavourite == false {
-            favImage = UIImage(systemName: "heart")
-        } else {
-            favImage = UIImage(systemName: "heart.fill")
-        }
-        
-        addToFavButton = UIBarButtonItem(image: favImage, style: .plain, target: self, action: #selector(addToFavourite))
-        navigationItem.rightBarButtonItem = addToFavButton
-    }
-    
-    
-    @objc func addToFavourite(){
-        
-        isFavourite = !isFavourite
-        RealmManager.makeItFavourite(editNews: newsItem!, newState: isFavourite)
-        
-        let favVC = FavouritesViewController()
-        
-        if newsItem?.isFavourite == false {
-            RealmManager.saveObject(newsItem!)
-            closure?(newsItem!)
-            addToFavButton.image = UIImage(systemName: "heart")
-        } else {
-            addToFavButton.image = UIImage(systemName: "heart.fill")
-        }
-    }
 }
